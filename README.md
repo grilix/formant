@@ -34,14 +34,14 @@ help save a lot of development time:
          :size "hey"}
   :data {:color "Red"
          :size nil}
-  :data-errors {:size ("Is invalid")}}
+  :data-errors {:size '("Is invalid")}}
 
 ;; After action errors:
 {:input {:color "Red"
          :size "4"}
   :data {:color "Red"
          :size 4}
-  :form-errors ("Size not available in that color")}
+  :form-errors '("Size not available in that color")}
 ```
 
 - `:input` The initial values we will work on (these are unsafe
@@ -95,17 +95,17 @@ validators/transformer functions associated to them:
 
 (formant/perform {} login-form)
 ;; => {:data-errors {:username "Is required"
-                    :password "Is required"},
-      :data {:username nil
-             :password nil}}
+;;                   :password "Is required"},
+;;     :data {:username nil
+;;            :password nil}}
 
 (formant/perform {:input {:username "John"
                           :password "123john"}}
                   login-form)
 ;; => {:input {:username "John"
-              :password "123john"}
-      :data {:username "John"
-             :password "123john"}}
+;;             :password "123john"}
+;;     :data {:username "John"
+;;            :password "123john"}}
 ```
 
 ### Actions
@@ -129,13 +129,13 @@ will stop after the first action that returns a state with errors.
 
 (formant/perform {:input {:username "john"}} create-user-form)
 ;; => {:input {:username "john"}
-       :data {:username "john"}
-       :form-errors ("User exists")}
+;;     :data {:username "john"}
+;;     :form-errors ("User exists")}
 
 (formant/perform {:input {:username "johnny"}} create-user-form)
 ;; => {:input {:username "johnny"}
-       :data {:username "johnny"
-              :id 2}}
+;;     :data {:username "johnny"
+;;            :id 2}}
 ```
 
 ### Requirements
@@ -166,12 +166,12 @@ This will be a list of other forms that must succeed before this form.
                           :title "First post"}}
                  create-post-form)
 ;; => {:input {:user-id 1
-               :title "First post"}
-       :data {:user-id 1
-              :title "First post"
-              :id 1}
-       :auth {:id 1
-              :username "john"}}
+;;               :title "First post"}
+;;       :data {:user-id 1
+;;              :title "First post"
+;;              :id 1}
+;;       :auth {:id 1
+;;              :username "john"}}
 ```
 
 ## Contributing
