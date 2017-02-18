@@ -190,16 +190,6 @@
   [& {:keys [message msg-fn allow-nil] :or {message "is not a valid email" allow-nil false}}]
   (pattern email-regexp :message message :msg-fn msg-fn :allow-nil allow-nil))
 
-(defn- coerce-number
-  "Coerces a value to an number otherwise returns nil."
-  [val]
-  (if-not (integer? val)
-    (try
-      (Long/parseLong val)
-      (catch NumberFormatException e
-        nil))
-    val))
-
 (defn number
   "Creates a transformer that converts the value assigned to the given 'attribute' key to a number.
    It silently ignores non-existing keys.
